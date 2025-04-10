@@ -1,23 +1,51 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useState, useEffect } from "react";
+import axios from "axios";
+import { ToggleButtonGroup, ToggleButton } from "@mui/material";
+import SendIcon from "@mui/icons-material/Send";
+import Facility from "./components/Facility";
+import SubFacility from "./components/SubFacility";
 
 function App() {
+  const [alignment, setAlignment] = useState("web");
+  const [content, setContent] = useState(null);
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
+        <ToggleButtonGroup
+          color="primary"
+          value={alignment}
+          exclusive
+          onChange={handleChange}
+          aria-label="Platform"
         >
-          Learn React
-        </a>
-      </header>
+          <ToggleButton
+            onClick={() =>
+              setContent(content !== "Facility" ? "Facility" : null)
+            }
+            value="Facility"
+          >
+            Facility
+          </ToggleButton>
+          <ToggleButton
+            onClick={() =>
+              setContent(content !== "SubFacility" ? "SubFacility" : null)
+            }
+            value="SubFacility"
+          >
+            SubFacility
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </div>
+      <div>{content === "Facility" && <Facility />}</div>
+      <div>{content === "SubFacility" && <SubFacility />}</div>
     </div>
   );
 }
