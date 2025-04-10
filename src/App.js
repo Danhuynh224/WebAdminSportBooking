@@ -4,6 +4,7 @@ import { ToggleButtonGroup, ToggleButton } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
 import Facility from "./components/Facility";
 import SubFacility from "./components/SubFacility";
+import Post from "./components/Post";
 
 function App() {
   const [alignment, setAlignment] = useState("web");
@@ -42,10 +43,20 @@ function App() {
           >
             SubFacility
           </ToggleButton>
+          <ToggleButton
+            onClick={() =>
+              setContent(content !== "Post" ? "Post" : null)
+            }
+            value="Post"
+          >
+            Post
+          </ToggleButton>
+
         </ToggleButtonGroup>
       </div>
       <div>{content === "Facility" && <Facility />}</div>
       <div>{content === "SubFacility" && <SubFacility />}</div>
+      <div>{content === "Post" && <Post />}</div>
     </div>
   );
 }
